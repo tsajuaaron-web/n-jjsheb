@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Norah ❤️</title>
+
+<style>
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: rgb(0, 0, 0);
+    color: white;
+    font-family: "Segoe UI", sans-serif;
+    text-align: center;
+    overflow: hidden;
+  }
+
+  .page {
+    display: none;
+    height: 100vh;
+    padding: 30px 20px;
+  }
+
+  .page.active {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .photos {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+  }
+
+  .photos img {
+    width: 120px;
+    height: 160px;
+    object-fit: cover;
+    border-radius: 15px;
+    border: 2px solid hotpink;
+  }
+
+  h2 {
+    min-height: 120px;
+    margin-bottom: 20px;
+  }
+
+  button {
+    padding: 12px 26px;
+    font-size: 18px;
+    border: none;
+    border-radius: 25px;
+    background: hotpink;
+    color: white;
+    margin: 10px;
+    cursor: pointer;
+  }
+
+  #noBtn {
+    position: absolute;
+  }
+
+  canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+  }
+</style>
+</head>
+
+<body>
+
+<!-- MUSIC -->
+<audio id="bgMusic" loop>
+  <source src="dooron_dooron.mp3" type="audio/mpeg">
+</audio>
+
+<canvas id="fireworks"></canvas>
+
+<!-- PAGE 1 -->
+<div class="page active">
+  <div class="photos">
+    <img src="norahannmathew.jpeg">
+    <img src="aaron1.jpeg">
+  </div>
+  <h2 id="text1"></h2>
+  <button class="next">Next 💌</button>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page">
+  <h2 id="text2"></h2>
+  <button class="next">Next 💖</button>
+</div>
+
+<!-- PAGE 3 -->
+<div class="page">
+  <h2 id="text3"></h2>
+  <button class="next">Next 💫</button>
+</div>
+
+<!-- PAGE 4 -->
+<div class="page">
+  <h2 id="text4"></h2>
+  <button class="next">Next 💍</button>
+</div>
+
+<!-- PAGE 5 -->
+<div class="page">
+  <h2 id="text5"></h2>
+  <button id="yesBtn">YES ❤️</button>
+  <button id="noBtn">NO 😭</button>
+</div>
+
+<script>
+const pages = document.querySelectorAll(".page");
+const nextBtns = document.querySelectorAll(".next");
+const music = document.getElementById("bgMusic");
+let current = 0;
+let musicStarted = false;
+
+const messages = [
+  "Hey Noruuuu… ❤️",
+  "Tum meri zindagi ka sabse khoobsurat hissa ho ✨",
+  "Njan ninne kandappol arinjilla… nee ente world aavumennu 🤍",
+  "With you, every dream feels possible 💫",
+  "Norah Ann Mathew… will you be mine forever? ❤️"
+];
+
+function typeText(el, text) {
+  el.innerHTML = "";
+  let i = 0;
+  const timer = setInterval(() => {
+    el.innerHTML += text.charAt(i++);
+    if (i === text.length) clearInterval(timer);
+  }, 45);
+}
+
+typeText(document.getElementById("text1"), messages[0]);
+
+nextBtns.forEach(btn => {
+  btn.addEventListener("click", () => {
+    pages[current].classList.remove("active");
+    current++;
+    pages[current].classList.add("active");
+    typeText(document.getElementById("text" + (current + 1)), messages[current]);
+
+    if (!musicStarted) {
+      music.play().catch(()=>{});
+      musicStarted = true;
+    }
+  });
+});
+
+/* NO BUTTON RUN */
+const noBtn = document.getElementById("noBtn");
+noBtn.addEventListener("mouseenter", () => {
+  noBtn.style.left = Math.random() * (window.innerWidth - 120) + "px";
+  noBtn.style.top = Math.random() * (window.innerHeight - 60) + "px";
+});
+
+/* YES + FIREWORKS */
+const yesBtn = document.getElementById("yesBtn");
+const canvas = document.getElementById("fireworks");
+const ctx = canvas.getContext("2d");
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+yesBtn.addEventListener("click", () => {
+  pages[current].innerHTML = "<h1>hehee😋 ye hui na baat guddd girlll🥰😘 I Loveee Youuu...❤️❤️🥰</h1>";
+  startFireworks();
+});
+
+function startFireworks() {
+  setInterval(() => {
+    const x = Math.random() * canvas.width;
+    const y = Math.random() * canvas.height / 2;
+    for (let i = 0; i < 50; i++) {
+      ctx.beginPath();
+      ctx.arc(x, y, 2, 0, Math.PI * 2);
+      ctx.fillStyle = `hsl(${Math.random()*360},100%,60%)`;
+      ctx.fill();
+    }
+  }, 300);
+}
+</script>
+
+</body>
+</html>
