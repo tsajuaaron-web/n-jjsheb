@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>For My Love ❤️</title>
+
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    height: 100vh;
+    width: 100vw;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    overflow: hidden;
+    background: linear-gradient(-45deg, #ff6ec4, #7873f5, #ff9a9e, #fad0c4);
+    background-size: 400% 400%;
+    animation: gradientBG 10s ease infinite;
+}
+
+@keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* BIG TEDDY */
+.big-teddy {
+    position: fixed;
+    font-size: 200px;
+    opacity: 0.15;
+    z-index: 0;
+    animation: floatBig 4s ease-in-out infinite;
+}
+.big-teddy.left { left: 20px; bottom: 20px; }
+.big-teddy.right { right: 20px; top: 20px; }
+
+@keyframes floatBig {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-30px); }
+    100% { transform: translateY(0px); }
+}
+
+/* BIG MOMO */
+.big-momo {
+    position: fixed;
+    font-size: 170px;
+    opacity: 0.18;
+    z-index: 0;
+    animation: momoFloat 5s ease-in-out infinite;
+}
+.big-momo.left-momo { left: 10%; top: 40%; }
+.big-momo.right-momo { right: 10%; bottom: 15%; }
+
+@keyframes momoFloat {
+    0% { transform: rotate(0deg) translateY(0px); }
+    50% { transform: rotate(10deg) translateY(-25px); }
+    100% { transform: rotate(0deg) translateY(0px); }
+}
+
+/* Pages */
+.page {
+    display: none;
+    height: 100vh;
+    padding-top: 100px;
+    position: relative;
+    z-index: 1;
+}
+.active { display: block; }
+
+h1 {
+    color: white;
+    font-size: 40px;
+    padding: 20px;
+    text-shadow: 0 0 15px rgba(0,0,0,0.3);
+}
+
+.photo {
+    width: 200px;
+    height: 200px;
+    border-radius: 20px;
+    margin: 10px;
+    object-fit: cover;
+    box-shadow: 0 0 25px hotpink;
+}
+
+/* Buttons */
+button {
+    padding: 15px 30px;
+    font-size: 18px;
+    border: none;
+    border-radius: 30px;
+    background-color: hotpink;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+    margin: 10px;
+}
+
+button:hover {
+    background-color: deeppink;
+    transform: scale(1.1);
+}
+
+.buttons {
+    position: relative;
+    height: 200px;
+}
+
+#noBtn {
+    position: absolute;
+}
+</style>
+</head>
+
+<body>
+
+<!-- Background Elements -->
+<div class="big-teddy left">🧸</div>
+<div class="big-teddy right">🧸</div>
+<div class="big-momo left-momo">🥟</div>
+<div class="big-momo right-momo">🥟</div>
+
+<!-- Music -->
+<audio id="bgMusic" loop>
+    <source src="music.mp3" type="audio/mp3">
+</audio>
+
+<!-- Page 1 -->
+<div class="page active" id="page1">
+    <h1>Hi My Love ❤️</h1>
+    <br>
+    <button onclick="nextPage()">DEKH KYA RAHE HO DABAAO!! 💕</button>
+</div>
+
+<!-- Page 2 -->
+<div class="page" id="page2">
+    <h1>Guddd Girllll 🥰😋</h1>
+    <button onclick="nextPage()">Next 💖</button>
+</div>
+
+<!-- Page 3 -->
+<div class="page" id="page3">
+    <h1>Your Smile Is My Favorite Thing 🥰😋</h1>
+    <button onclick="nextPage()">Next 💞</button>
+</div>
+
+<!-- Page 4 -->
+<div class="page" id="page4">
+    <h1>You Are My Favorite Momo 🥟💖</h1>
+    <button onclick="nextPage()">Next 🧸</button>
+</div>
+
+<!-- Page 5 -->
+<div class="page" id="page5">
+    <h1>I Promise To Annoy You Forever 😆💘</h1>
+    <button onclick="nextPage()">Next 💍</button>
+</div>
+
+<!-- Page 6 -->
+<div class="page" id="page6">
+    <h1>Will you be mine forever? 💍</h1>
+    <div class="buttons">
+        <button onclick="showYes()">YES 💖</button>
+        <button id="noBtn">NO 😜</button>
+    </div>
+</div>
+
+<!-- Page 7 -->
+<div class="page" id="page7">
+    <h1>ye hui naa baat kuchupuchuuu!!! 😋🥰🎉💖</h1>
+    <h1>Forever Starts Now 🧸🥟💍</h1>
+    <button onclick="nextPage()">One More Thing ❤️</button>
+</div>
+
+<!-- Page 8 -->
+<div class="page" id="page8">
+    <h1 style="font-size:55px;">I LOVEEE... YOUUU.. 🥰😘</h1>
+    <button onclick="restart()">Start Again 🔁💖</button>
+</div>
+
+<script>
+let currentPage = 1;
+let musicStarted = false;
+
+function nextPage() {
+    document.getElementById("page" + currentPage).classList.remove("active");
+    currentPage++;
+    document.getElementById("page" + currentPage).classList.add("active");
+
+    if (!musicStarted) {
+        document.getElementById("bgMusic").play();
+        musicStarted = true;
+    }
+}
+
+function showYes() {
+    document.getElementById("page6").classList.remove("active");
+    document.getElementById("page7").classList.add("active");
+}
+
+function restart() {
+    document.getElementById("page8").classList.remove("active");
+    currentPage = 1;
+    document.getElementById("page1").classList.add("active");
+}
+
+/* Moving NO Button */
+const noBtn = document.getElementById("noBtn");
+
+noBtn.addEventListener("mouseover", () => {
+    const container = document.querySelector(".buttons");
+    const maxX = container.clientWidth - noBtn.clientWidth;
+    const maxY = container.clientHeight - noBtn.clientHeight;
+    const randomX = Math.random() * maxX;
+    const randomY = Math.random() * maxY;
+    noBtn.style.left = randomX + "px";
+    noBtn.style.top = randomY + "px";
+});
+</script>
+
+</body>
+</html>
